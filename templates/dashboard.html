@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Welcome — {{ user.username }}</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>Welcome, <strong>{{ user.username }}</strong></div>
+      <div><a href="/logout">Logout</a></div>
+    </div>
+
+    <div class="center-card">
+      <h2>Your site is ready</h2>
+      <p>We built this website for you — open the preview below.</p>
+
+      <button id="openPreview" class="primary">Open Preview</button>
+      <p style="margin-top:12px;">Or open in a new tab: <a href="{{ user.site_link }}" target="_blank">{{ user.site_link }}</a></p>
+    </div>
+  </div>
+
+  <!-- Modal with iframe -->
+  <div id="modal" class="modal-hidden">
+    <div class="modal-backdrop" id="backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Preview — {{ user.username }}</h3>
+        <button id="closeModal">Close</button>
+      </div>
+      <iframe src="{{ user.site_link }}" id="previewFrame"></iframe>
+    </div>
+  </div>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const openBtn = document.getElementById('openPreview');
+    const closeBtn = document.getElementById('closeModal');
+    const backdrop = document.getElementById('backdrop');
+
+    openBtn.addEventListener('click', ()=> modal.className = 'modal-visible');
+    closeBtn.addEventListener('click', ()=> modal.className = 'modal-hidden');
+    backdrop.addEventListener('click', ()=> modal.className = 'modal-hidden');
+
+    // Auto open modal if ?auto=1 is present
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('auto') === '1') {
+      modal.className = 'modal-visible';
+    }
+  </script>
+</body>
+</html>

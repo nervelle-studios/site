@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Admin — Nervelle Studios</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div>Admin Dashboard</div>
+      <div><a href="/logout">Logout</a></div>
+    </div>
+
+    <div class="center-card">
+      <h2>Clients</h2>
+      <p><a class="primary" href="/admin/create">Create new client</a></p>
+      <table class="simple-table">
+        <thead><tr><th>Username</th><th>Site Link</th><th>Actions</th></tr></thead>
+        <tbody>
+        {% for u in users %}
+          <tr>
+            <td>{{ u.username }}</td>
+            <td style="max-width:420px; overflow:hidden; text-overflow:ellipsis;">{{ u.site_link }}</td>
+            <td>
+              <a href="/admin/edit/{{u.id}}">Edit</a> |
+              <form method="POST" action="/admin/delete/{{u.id}}" style="display:inline;" onsubmit="return confirm('Delete user?');">
+                <button type="submit" class="linkish">Delete</button>
+              </form>
+            </td>
+          </tr>
+        {% else %}
+          <tr><td colspan="3">No clients yet.</td></tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

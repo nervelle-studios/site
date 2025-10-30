@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Client Login — Nervelle Studios</title>
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <div class="center-box">
+    <h1>Nervelle Studios — Client Portal</h1>
+    <form method="POST" action="/login" class="card">
+      <label>Username</label>
+      <input name="username" required>
+      <label>Password</label>
+      <input type="password" name="password" required>
+      <div style="text-align:center;">
+        <button class="primary">Login</button>
+      </div>
+    </form>
+    <p style="color:#bbb; font-size:0.9rem;">Admin users use the admin credentials you set in Render / environment.</p>
+  </div>
+</body>
+</html>

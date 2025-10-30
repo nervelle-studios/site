@@ -1,0 +1,43 @@
+/* Simple aesthetic styles */
+:root {
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#9aa4b2;
+  --accent:#e0a800;
+}
+body {
+  margin:0;
+  font-family:Inter, system-ui, Arial, sans-serif;
+  background: linear-gradient(180deg, #071021 0%, #0b1220 100%);
+  color:#e6eef6;
+}
+
+/* Center boxes */
+.center-box { max-width:420px; margin:6vh auto; text-align:center; padding:24px; }
+.card { background:var(--card); padding:18px; border-radius:12px; box-shadow:0 6px 24px rgba(2,6,23,0.6); }
+input { display:block; width:100%; padding:10px; margin:8px 0 12px 0; border-radius:8px; border:none; background:#0d1724; color:#e6eef6; }
+button.primary { background:var(--accent); color:#08141a; border:none; padding:10px 16px; border-radius:8px; cursor:pointer; font-weight:600; }
+.primary { display:inline-block; padding:8px 12px; background:var(--accent); color:#08141a; border-radius:8px; text-decoration:none; }
+
+/* Layout */
+.wrap { max-width:1000px; margin:30px auto; padding:0 18px; }
+.topbar { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; }
+
+/* Card center */
+.center-card { background:var(--card); padding:28px; border-radius:12px; box-shadow:0 6px 24px rgba(2,6,23,0.6); }
+
+/* Table */
+.simple-table { width:100%; border-collapse:collapse; margin-top:12px; color:#dbe7f5; }
+.simple-table th, .simple-table td { padding:8px 10px; border-bottom:1px solid rgba(255,255,255,0.03); text-align:left; }
+
+/* Modal */
+.modal-hidden { display:none; }
+.modal-visible { position:fixed; inset:0; display:block; z-index:9999; }
+.modal-backdrop { position:fixed; inset:0; background:rgba(2,6,23,0.6); }
+.modal-content {
+  position:fixed; left:50%; top:50%; transform:translate(-50%,-50%);
+  width:85%; height:80%; background:var(--card); border-radius:12px; overflow:hidden; box-shadow:0 20px 60px rgba(2,6,23,0.7);
+}
+.modal-header { display:flex; justify-content:space-between; align-items:center; padding:10px 14px; background:#06111b; color:#fff; }
+iframe#previewFrame { width:100%; height:calc(100% - 52px); border:none; }
+.linkish { background:none; border:none; color:var(--accent); cursor:pointer; text-decoration:underline; padding:0; font:inherit; }
