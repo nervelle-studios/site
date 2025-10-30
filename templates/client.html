@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Dashboard — Nervelle Studios</title>
+<style>
+  body {
+    font-family: "Lucida Sans", "Lucida Grande", sans-serif;
+    color: #f8f8f8;
+    background: rgba(16,16,16,0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  .box {
+    background: #101010dd;
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 400px;
+    text-align: center;
+  }
+  h2 { color: #094b50; }
+  a {
+    display: inline-block;
+    margin-top: 20px;
+    color: #094b50;
+    text-decoration: none;
+  }
+</style>
+</head>
+<body>
+  <div class="box">
+    <h2>Welcome, {{ username }}</h2>
+    <p>Your project dashboard will appear here.</p>
+    <a href="{{ url_for('logout') }}">Logout</a>
+  </div>
+</body>
+</html>
