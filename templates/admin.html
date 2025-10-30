@@ -3,94 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin Dashboard</title>
+<title>Admin — Nervelle Studios</title>
 <style>
   body {
     font-family: "Lucida Sans", "Lucida Grande", sans-serif;
-    background: transparent;
+    background: rgba(16,16,16,0.85);
     color: #f8f8f8;
     display: flex;
-    justify-content: center;
-    align-items: flex-start;
     flex-direction: column;
-    min-height: 100vh;
-    margin: 0;
+    align-items: center;
+    padding-top: 60px;
   }
-
-  .contact-us-section {
-    text-align: center;
-    background: rgba(16, 16, 16, 0.85);
-    padding: 40px;
-    border-radius: 20px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.3);
-    width: 90%;
-    max-width: 500px;
-    margin: 60px auto;
-  }
-
-  h2 {
-    color: #094b50;
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
-
-  .form-input {
-    width: 100%;
-    padding: 12px 15px;
-    margin-bottom: 15px;
-    border: 1px solid #094b50;
-    border-radius: 8px;
-    background: #f8f8f8;
-    color: #101010;
-    font-size: 15px;
-  }
-
-  .submit-btn {
-    width: 100%;
-    background: #094b50;
-    color: #fff;
-    border: none;
-    padding: 12px;
-    border-radius: 8px;
-    font-size: 15px;
-    cursor: pointer;
-    transition: background 0.3s;
-  }
-
-  .submit-btn:hover { background: #0a6a72; }
-
-  .client-links {
-    margin-top: 25px;
-    text-align: left;
-  }
-
-  .client-links a {
+  h2 { color: #094b50; }
+  a {
     color: #094b50;
     text-decoration: none;
-    display: block;
-    margin-bottom: 5px;
+    margin-top: 20px;
   }
-
-  .client-links a:hover { text-decoration: underline; }
 </style>
 </head>
 <body>
-  <div class="contact-us-section">
-    <h2>Admin Dashboard</h2>
-
-    <form method="POST" action="/admin/create_user">
-      <input type="text" class="form-input" name="username" placeholder="Client Username" required>
-      <input type="password" class="form-input" name="password" placeholder="Client Password" required>
-      <input type="text" class="form-input" name="link" placeholder="Client Website Link (https://...)" required>
-      <button type="submit" class="submit-btn">Create Client</button>
-    </form>
-
-    <div class="client-links">
-      <h3 style="color:#f8f8f8;">Client Links</h3>
-      {% for user in users %}
-        <a href="{{ user.link }}" target="_blank">{{ user.username }}</a>
-      {% endfor %}
-    </div>
-  </div>
+  <h2>Admin Dashboard</h2>
+  <p>Welcome, {{ username }}</p>
+  <a href="{{ url_for('logout') }}">Logout</a>
 </body>
 </html>
