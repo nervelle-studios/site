@@ -40,9 +40,12 @@ def logout_user():
     session.pop("user_id", None)
 
 # Create DB and admin user if env set
-@app.before_first_request
+@app.before_request
 def ensure_db_and_admin():
-    db.create_all()
+    if not hasattr(app, "_db_initialized"):
+        db.create_all()
+        app._db_initialized = True
+
     admin_username = os.environ.get("ADMIN_USERNAME")
     admin_password = os.environ.get("ADMIN_PASSWORD")
     if admin_username and admin_password:
