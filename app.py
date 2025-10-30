@@ -102,26 +102,21 @@ def admin_dashboard():
     users = User.query.filter(User.is_admin == False).all()
     return render_template("admin.html", users=users)
 
-@app.route("/admin/create", methods=["GET","POST"])
-def admin_create_user():
-    require_admin()
-    if request.method == "POST":
-        username = request.form.get("username","").strip()
-        password = request.form.get("password","")
-        site_link = request.form.get("site_link","").strip()
-        if not username or not password:
-            flash("Username and password required", "danger")
-            return redirect(url_for("admin_create_user"))
-        existing = User.query.filter_by(username=username).first()
-        if existing:
-            flash("User already exists", "danger")
-            return redirect(url_for("admin_create_user"))
-        new = User(username=username, password_hash=generate_password_hash(password), site_link=site_link, is_admin=False)
-        db.session.add(new)
-        db.session.commit()
-        flash("User created", "success")
-        return redirect(url_for("admin_dashboard"))
-    return render_template("admin_create.html")
+@app.route('/admin/create_user', methods=['POST'])
+def create_user():
+    if not session.get('is_admin'):
+        return redirect('/login')
+
+    username = request.form['username']
+    password = request.form['password']
+    link = request.form['link']
+
+    user = User(username=username, password=password, link=link)
+    db.session.add(user)
+    db.session.commit()
+
+    return redirect('/admin')
+
 
 @app.route("/admin/edit/<int:user_id>", methods=["GET","POST"])
 def admin_edit_user(user_id):
