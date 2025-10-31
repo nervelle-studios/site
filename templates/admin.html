@@ -1,30 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Admin — Nervelle Studios</title>
-<style>
-  body {
-    font-family: "Lucida Sans", "Lucida Grande", sans-serif;
-    background: rgba(16,16,16,0.85);
-    color: #f8f8f8;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 60px;
-  }
-  h2 { color: #094b50; }
-  a {
-    color: #094b50;
-    text-decoration: none;
-    margin-top: 20px;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Dashboard</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', sans-serif;
+    }
+
+    body {
+      background: transparent;
+      color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+    }
+
+    .dashboard-container {
+      background: rgba(16, 16, 16, 0.85);
+      width: 95%;
+      max-width: 900px;
+      border-radius: 16px;
+      padding: 30px;
+      margin: 40px 0;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+    }
+
+    h2 {
+      color: #094b50;
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 25px;
+    }
+
+    input[type="text"], input[type="password"], input[type="url"] {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      outline: none;
+      width: 180px;
+      max-width: 100%;
+      font-size: 0.95rem;
+    }
+
+    button {
+      background-color: #094b50;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      font-size: 0.95rem;
+    }
+
+    button:hover {
+      background-color: #0a646c;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      overflow-x: auto;
+      margin-bottom: 25px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.95rem;
+    }
+
+    th {
+      color: #094b50;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    tr:hover {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    a {
+      color: #094b50;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .logout {
+      display: block;
+      text-align: center;
+      margin-top: 15px;
+      color: #f8f8f8;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .dashboard-container {
+        padding: 20px;
+      }
+
+      form {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      input[type="text"], input[type="password"], input[type="url"] {
+        width: 100%;
+      }
+
+      table {
+        font-size: 0.9rem;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
 </head>
 <body>
-  <h2>Admin Dashboard</h2>
-  <p>Welcome, {{ username }}</p>
-  <a href="{{ url_for('logout') }}">Logout</a>
+  <div class="dashboard-container">
+    <h2>Admin Dashboard</h2>
+
+    <form method="POST" action="{{ url_for('add_client') }}">
+      <input type="text" name="username" placeholder="Client Username" required />
+      <input type="password" name="password" placeholder="Client Password" required />
+      <input type="url" name="website_url" placeholder="Website URL" required />
+      <button type="submit">Add Client</button>
+    </form>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Website</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for client in clients %}
+        <tr>
+          <td>{{ client.username }}</td>
+          <td><a href="{{ client.website_url }}" target="_blank">View</a></td>
+          <td>
+            <a href="{{ url_for('edit_client', id=client.id) }}">Edit</a> |
+            <a href="{{ url_for('delete_client', id=client.id) }}">Delete</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <a href="{{ url_for('logout') }}" class="logout">Logout</a>
+  </div>
 </body>
 </html>
